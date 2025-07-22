@@ -1,8 +1,17 @@
-import type { Category, Product, SearchParams, SearchResponse } from "../types";
+import type {
+  Category,
+  Product,
+  SDKConfig,
+  SearchParams,
+  SearchResponse,
+} from "../types";
 import { ApiClient } from "../utils/api-client";
 
 export class StoreModule {
-  constructor(private apiClient: ApiClient) {}
+  constructor(
+    private apiClient: ApiClient,
+    private config: SDKConfig
+  ) {}
 
   products = {
     getProductBySlug: async (slug: string) => {
@@ -16,14 +25,15 @@ export class StoreModule {
 
   categories = {
     searchCategories: async ({ page = 0, size = 10 }: SearchParams) => {
-      // `/store_svc/v1/stores/${this.apiClient.config.storeSlug}/categories/search`,
-
       const response = await this.apiClient
         .instance()
-        .put(`/store_svc/v1/stores/westmore-1/categories/search`, {
-          page,
-          size,
-        });
+        .put(
+          `/store_svc/v1/stores/${this.config.storeSlug}/categories/search`,
+          {
+            page,
+            size,
+          }
+        );
 
       return response.data as SearchResponse<Category>;
     },

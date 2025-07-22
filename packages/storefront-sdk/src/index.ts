@@ -9,7 +9,7 @@ export class EtailifyStorefrontSDK {
 
   constructor(config: SDKConfig) {
     this.apiClient = new ApiClient(config);
-    this.store = new StoreModule(this.apiClient);
+    this.store = new StoreModule(this.apiClient, config);
   }
 
   public get client() {
