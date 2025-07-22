@@ -1,3 +1,8 @@
+```
+sudo chown -R asx /Users/asx/Desktop/_work/themes_monorepo_2
+sudo chmod -R u+w /Users/asx/Desktop/_work/themes_monorepo_2
+```
+
 # Turborepo starter
 
 This Turborepo starter is maintained by the Turborepo core team.

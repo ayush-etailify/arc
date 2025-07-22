@@ -1,0 +1,32 @@
+{
+  "name": "@etailify/storefront-sdk",
+  "version": "0.0.1",
+  "description": "Etailify Storefront SDK for API interactions",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "check-types": "tsc --noEmit",
+    "clean": "rm -rf dist"
+  },
+  "files": [
+    "dist"
+  ],
+  "author": "etailify",
+  "devDependencies": {
+    "typescript": "^5.8.3",
+    "@types/js-cookie": "^3.0.6"
+  },
+  "dependencies": {
+    "axios": "^1.10.0",
+    "js-cookie": "^3.0.5"
+  }
+}
