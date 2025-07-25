@@ -1,5 +1,5 @@
-import Footer from "@/modules/common/footer";
-import Header from "@/modules/common/header";
+import Footer from "@/modules/common/components/footer";
+import Header from "@/modules/common/components/header";
 
 export default function StoreLayout({
   children,

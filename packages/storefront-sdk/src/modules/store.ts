@@ -1,11 +1,6 @@
-import type {
-  Category,
-  Product,
-  SDKConfig,
-  SearchParams,
-  SearchResponse,
-} from "../types";
-import { ApiClient } from "../utils/api-client";
+import type { Category, HttpTypes, Product } from "@etailify/types";
+import { ApiClient } from "../services/api-client";
+import type { SDKConfig } from "../types";
 
 export class StoreModule {
   constructor(
@@ -24,7 +19,10 @@ export class StoreModule {
   };
 
   categories = {
-    searchCategories: async ({ page = 0, size = 10 }: SearchParams) => {
+    searchCategories: async ({
+      page = 0,
+      size = 10,
+    }: HttpTypes.SearchApiParams) => {
       const response = await this.apiClient
         .instance()
         .put(
@@ -35,11 +33,11 @@ export class StoreModule {
           }
         );
 
-      return response.data as SearchResponse<Category>;
+      return response.data as HttpTypes.SearchApiResponse<Category>;
     },
     searchCategoryProducts: async (
       slug: string,
-      { page = 0, size = 10 }: SearchParams
+      { page = 0, size = 10 }: HttpTypes.SearchApiParams
     ) => {
       const response = await this.apiClient
         .instance()
@@ -49,7 +47,7 @@ export class StoreModule {
           size,
         });
 
-      return response.data as SearchResponse<Product>;
+      return response.data as HttpTypes.SearchApiResponse<Product>;
     },
   };
 }

@@ -1,19 +1,7 @@
-import { sdk } from "@/lib/config";
+import { sdk } from "@/lib/sdk-config";
 import { PageProps } from "@/lib/types/common";
-import { Product } from "@/lib/types/products";
-import { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-
-export async function generateMetadata(props: PageProps): Promise<Metadata> {
-  const { name } = await props.searchParams;
-
-  return {
-    title: `${name} | Westmore`,
-    description: `${name} category.`,
-    // TODO: add canonical slug
-  };
-}
 
 export default async function CategoryProductsPage(props: PageProps) {
   const { slug } = await props.params;
@@ -35,7 +23,7 @@ export default async function CategoryProductsPage(props: PageProps) {
         {products.response.length === 0 ? (
           <div>No products found</div>
         ) : (
-          products.response.map((product: Product, index: number) => (
+          products.response.map((product, index: number) => (
             <Link
               key={product.slug}
               href={`/products/${product.slug}`}

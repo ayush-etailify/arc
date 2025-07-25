@@ -1,29 +1,9 @@
-import { sdk } from "@/lib/config";
-import { Media, PageProps } from "@/lib/types/common";
+import { sdk } from "@/lib/sdk-config";
 import { calculateDiscountPercentage } from "@/lib/utils/discounts";
 import { readPrice } from "@/lib/utils/text-format";
-import { Metadata } from "next";
+import ProductActions from "@/modules/products/components/product-actions";
+import { PageProps } from "@etailify/types";
 import Image from "next/image";
-import { notFound } from "next/navigation";
-
-export async function generateMetadata(props: PageProps): Promise<Metadata> {
-  const { slug } = await props.params;
-  const product = await sdk.store.products.getProductBySlug(slug);
-
-  if (!product) notFound();
-
-  return {
-    title: `${product.name} | Westmore`,
-    description: `${product.name}`,
-    openGraph: {
-      title: `${product.name} | Westmore`,
-      description: `${product.name}`,
-      images: product.skus[0]?.media?.[0]?.media_public_url
-        ? [product.skus[0]?.media?.[0]?.media_public_url]
-        : [],
-    },
-  };
-}
 
 export default async function ProductsDetailPage(props: PageProps) {
   const { slug } = await props.params;
@@ -39,7 +19,7 @@ export default async function ProductsDetailPage(props: PageProps) {
           >
             {product?.skus[0]?.media &&
               product.skus[0].media.length > 0 &&
-              product.skus[0].media.map((media: Media) => (
+              product.skus[0].media.map((media) => (
                 <div
                   key={media.media_name}
                   className="h-32 overflow-clip rounded-md border border-stone-200"
@@ -102,7 +82,7 @@ export default async function ProductsDetailPage(props: PageProps) {
               {product?.description}
             </p>
           </div>
-          {/* <ProductActions product={product} /> */}
+          <ProductActions product={product} />
         </div>
       </div>
       <div className="my-12 grid grid-cols-1 gap-10 sm:my-32 sm:grid-cols-3">

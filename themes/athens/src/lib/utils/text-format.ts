@@ -1,4 +1,4 @@
-import { CurrencyFormat } from "@/lib/types/common";
+import { CurrencyFormat } from "@etailify/types";
 
 export const readPrice = (
   price: string,
